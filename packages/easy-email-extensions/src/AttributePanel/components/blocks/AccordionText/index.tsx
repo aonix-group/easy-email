@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, useFocusIdx } from 'easy-email-editor';
+import { useFocusIdx } from 'easy-email-editor';
 
 import { Padding } from '../../attributes/Padding';
 import { BackgroundColor } from '../../attributes/BackgroundColor';
@@ -18,10 +18,10 @@ export function AccordionText() {
   return (
     <AttributesPanelWrapper>
       <Collapse defaultActiveKey={['0', '1', '2']}>
-        <Collapse.Item name='0' header='Setting'>
+        <Collapse.Item name='0' header={t('Setting')}>
           <Space direction='vertical'>
             <TextAreaField
-              label='Content'
+              label={t('Content')}
               name={`${focusIdx}.data.value.content`}
               autoSize={{ minRows: 5 }}
             />
@@ -50,7 +50,7 @@ export function AccordionText() {
               </Grid.Col>
             </Grid.Row>
 
-            <Padding title='Padding' attributeName='padding' />
+            <Padding title={t('Padding')} attributeName='padding' />
           </Space>
         </Collapse.Item>
       </Collapse>

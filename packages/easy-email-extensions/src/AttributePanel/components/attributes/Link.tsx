@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useFocusIdx, Stack } from 'easy-email-editor';
+import { useFocusIdx } from 'easy-email-editor';
 import { IconLink } from '@arco-design/web-react/icon';
 import { SelectField, TextField } from '../../../components/Form';
 import { Grid } from '@arco-design/web-react';
@@ -13,22 +13,22 @@ export function Link() {
         <Grid.Col span={11}>
           <TextField
             prefix={<IconLink />}
-            label={<span>Href&nbsp;&nbsp;&nbsp;</span>}
+            label={<span>{t('Href')}&nbsp;&nbsp;&nbsp;</span>}
             name={`${focusIdx}.attributes.href`}
           />
         </Grid.Col>
         <Grid.Col offset={1} span={11}>
           <SelectField
-            label='Target'
+            label={t('Target')}
             name={`${focusIdx}.attributes.target`}
             options={[
               {
                 value: '',
-                label: '_self',
+                label: t('_self'),
               },
               {
                 value: '_blank',
-                label: '_blank',
+                label: t('_blank'),
               },
             ]}
           />

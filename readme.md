@@ -11,11 +11,8 @@
 <p align="center">
 
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
-  <a aria-label="NPM version" href="https://www.npmjs.com/package/easy-email-editor">
-    <img alt="" src="https://badgen.net/npm/v/easy-email-editor">
-  </a>
   <a aria-label="React version" href="https://react.js">
-    <img alt="" src="https://img.shields.io/badge/React-17.0-yellow.svg">
+    <img alt="" src="https://img.shields.io/badge/React-18.2-yellow.svg">
   </a>
   <a aria-label="MJML" href="https://mjml.io/">
     <img src="https://img.shields.io/badge/MJML-awesome-rgb(120 33 117).svg">
@@ -23,15 +20,15 @@
   <a aria-label="Package size" href="https://www.typescriptlang.org/">
     <img alt="Using TypeScript" src="https://img.shields.io/badge/%3C/%3E-TypeScript-brightgreenred.svg">
   </a>
-  <img alt="" src="https://badgen.net/npm/license/easy-email-editor">
 </p>
 
-## Join Our Community
+---
 
-<a aria-label="Join Easy Email Discord Community" href="https://discord.gg/bqrAE2zCjn">
-  <img src="./join_discord.png" width="240">
-</a>
+## Pro Version Announcement
 
+We are delighted to announce that we now have a more powerful and customizable commercial version available. <a href="https://www.easyemail.pro/?utm_source=github" target="_blank">Check it out here </a>.
+
+---
 
 ## Introduction
 
@@ -43,8 +40,6 @@ Easy email is developed based on the [MJML](https://mjml.io/) and has very good 
 - Can be converted into `MJML`, or generated through `MJML`
 - Defined custom block
 - Dynamic rendering
-- Easily customize UI when you need
-- Theme configuration
 
 |                  Video Overview                  |
 | :----------------------------------------------: |
@@ -52,7 +47,10 @@ Easy email is developed based on the [MJML](https://mjml.io/) and has very good 
 
 ## Live Demo
 
-Check out the live demo here: <a href="https://email.maocanhua.cn/?utm_source=github" target="_blank" alt="https://email.maocanhua.cn/?utm_source=github">https://email.maocanhua.cn</a>
+Check out the live demo here: <a href="https://email.maocanhua.cn/?utm_source=github" target="_blank" alt="https://email.maocanhua.cn/?utm_source=github">email.maocanhua.cn</a>
+
+Pro version live demo here: <a href="https://demo.easyemail.pro/full?utm_source=github-live" target="_blank">demo.easyemail.pro</a>.
+
 
 ## Getting started
 
@@ -116,7 +114,9 @@ export default function App() {
 
 ## Examples
 
-> Please see <a href="https://github.com/m-Ryan/easy-email-demo" target="_blank" alt="https://github.com/m-Ryan/easy-email-demo">https://github.com/m-Ryan/easy-email-demo</a>
+> Vite: <a href="https://github.com/m-Ryan/easy-email-demo" target="_blank" alt="https://github.com/m-Ryan/easy-email-demo">https://github.com/m-Ryan/easy-email-demo</a>
+
+> Nextjs: <a href="https://github.com/m-Ryan/easy-email-nextjs-demo" target="_blank" alt="https://github.com/m-Ryan/easy-email-nextjs-demo">https://github.com/m-Ryan/easy-email-nextjs-demo</a>
 
 </br>
 
@@ -148,6 +148,12 @@ export default function App() {
 | delete/backspace  | delete block                                                                                      |
 | tab / shift + tab | fast select block, if block is focusing,`tab` select next block & `shift + tab` select prev block |
 
+## How does it work?
+
+<img alt="" src="./work.png">
+
+</br>
+
 ## Packages
 
 - [easy-email-core](./packages/easy-email-core/readme.md)
@@ -156,34 +162,20 @@ export default function App() {
 
 </br>
 
-## How does it work?
-
-<img alt="" src="./work.png">
-
-</br>
-
-## Roadmap
-
-- Localization in progress.
-- Awesome responsive, support mobile and desktop display different styles (without any compatibility issues)
-- Replace shadow dom with iframe, support firefox/safari browsers.
-- Improve documentation and add more usage examples
-
-## Donation
-
-If you like this project, please consider donating.
-
-<a href="https://www.buymeacoffee.com/easyemail" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee"></a>
-
 ## Development
 
 ```sh
-$ git clone git@github.com:arco-design/easy-email.git
+$ git clone git@github.com:zalify/easy-email.git
 $ cd easy-email
+
+
+$ yarn
 $ yarn install-all
 $ yarn dev
 
 ```
+
+`If you need some new features, we always welcome you to submit a PR.`
 
 ## License
 

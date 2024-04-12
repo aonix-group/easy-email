@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Tabs } from '@arco-design/web-react';
+import { Tabs } from '@arco-design/web-react';
 import { AttributePanel } from '@extensions/AttributePanel';
 import { SourceCodePanel } from '@extensions/SourceCodePanel';
 import { FullHeightOverlayScrollbars } from '@extensions/components/FullHeightOverlayScrollbars';
 import { IconLeft } from '@arco-design/web-react/icon';
 import styles from './index.module.scss';
+
 export interface ConfigurationPanelProps {
   showSourceCode: boolean;
+  jsonReadOnly: boolean;
+  mjmlReadOnly: boolean;
   height: string;
   onBack?: () => void;
   compact?: boolean;
@@ -17,6 +20,8 @@ export function ConfigurationPanel({
   height,
   onBack,
   compact,
+  jsonReadOnly,
+  mjmlReadOnly,
 }: ConfigurationPanelProps) {
   const [inited, setInited] = useState(false);
 
@@ -80,7 +85,7 @@ export function ConfigurationPanel({
             }
           >
             <FullHeightOverlayScrollbars height={`calc(${height} - 60px)`}>
-              <SourceCodePanel />
+              <SourceCodePanel jsonReadOnly={jsonReadOnly} mjmlReadOnly={mjmlReadOnly} />
             </FullHeightOverlayScrollbars>
           </Tabs.TabPane>
         </Tabs>

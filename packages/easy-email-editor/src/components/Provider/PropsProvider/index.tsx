@@ -1,5 +1,6 @@
-import { IBlockData, IPage } from 'easy-email-core';
+import { IBlockData } from 'easy-email-core';
 import React, { useMemo } from 'react';
+
 export interface CollectedBlock {
   label: string;
   helpText: string;
@@ -14,6 +15,7 @@ export interface BlockGroup {
 }
 
 export interface PropsProviderProps {
+  children?: React.ReactNode;
   height: string;
   fontList?: { value: string; label: string }[];
   onAddCollection?: (payload: CollectedBlock) => void;
@@ -54,6 +56,7 @@ export const EditorPropsContext = React.createContext<
     mergeTagGenerate: Required<PropsProviderProps['mergeTagGenerate']>;
   }
 >({
+  children: null,
   height: '100vh',
   fontList: [],
   onAddCollection: undefined,

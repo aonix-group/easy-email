@@ -93,7 +93,12 @@ const render = (data: ICustomButton, idx: string, context: IPage): IBlockData =>
   const { buttonText } = data.data.value;
 
   const instance = (
-    <Button background-color={attributes['background-color']}>{buttonText}</Button>
+    <Button
+      background-color={attributes['background-color']}
+      css-class={mode === 'testing' ? getPreviewClassName(idx, data.type) : ''} // Add this class to enable an interactive prompt during editing.
+    >
+      {buttonText}
+    </Button>
   );
 
   return instance;
@@ -103,7 +108,17 @@ const render = (data: ICustomButton, idx: string, context: IPage): IBlockData =>
 Another way is that you can write [MJML](https://documentation.mjml.io/).
 
 ```ts
-import { MjmlToJson } from 'easy-email-editor';
+import {
+  IBlockData,
+  BasicType,
+  components,
+  createCustomBlock,
+  getPreviewClassName,
+  AdvancedType,
+} from 'easy-email-core';
+import { MjmlToJson } from 'easy-email-extensions';
+
+const { BlockRenderer } = components;
 
 const render = (
   data: ICustomButton,
@@ -116,10 +131,12 @@ const render = (
   const { buttonText } = data.data.value;
 
   const instance = MjmlToJson(
-    `<mj-button background-color=${attributes['background-color']}>${buttonText}</mj-button>`,
-  );
+    `<mj-button background-color==${attributes['background-color']}  css-class="${
+      mode === 'testing' ? getPreviewClassName(idx, data.type) : ''
+    }">${buttonText}</mj-button>`,
+  ) as IBlockData;
 
-  return instance;
+  return <BlockRenderer data={instance} />;
 };
 ```
 

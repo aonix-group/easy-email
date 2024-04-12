@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { IBlockData } from '@core/typings';
 import { BasicType } from '@core/constants';
-import { CSSProperties } from 'react';
 import { createBlock } from '@core/utils/createBlock';
 import { merge } from 'lodash';
-import { getAdapterAttributesString } from '@core/utils';
-import { BlockRenderer } from '@core/components/BlockRenderer';
+import { t } from '@core/utils';
 import { BasicBlock } from '@core/components/BasicBlock';
 
 export type ISection = IBlockData<
@@ -29,9 +27,11 @@ export type ISection = IBlockData<
 >;
 
 export const Section = createBlock<ISection>({
-  name: 'Section',
+  get name() {
+    return t('Section');
+  },
   type: BasicType.SECTION,
-  create: (payload) => {
+  create: payload => {
     const defaultData: ISection = {
       type: BasicType.SECTION,
       data: {
@@ -54,6 +54,11 @@ export const Section = createBlock<ISection>({
   },
   validParentType: [BasicType.PAGE, BasicType.WRAPPER],
   render(params) {
-    return <BasicBlock params={params} tag="mj-section" />;
+    return (
+      <BasicBlock
+        params={params}
+        tag='mj-section'
+      />
+    );
   },
 });

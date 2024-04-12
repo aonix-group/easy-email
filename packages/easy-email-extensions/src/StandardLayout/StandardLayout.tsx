@@ -1,4 +1,4 @@
-import { Card, ConfigProvider, Layout, Message, Tabs } from '@arco-design/web-react';
+import { Card, ConfigProvider, Layout } from '@arco-design/web-react';
 import { useEditorProps, useFocusIdx } from 'easy-email-editor';
 import React, { useEffect } from 'react';
 import { InteractivePrompt } from '../InteractivePrompt';
@@ -15,7 +15,9 @@ import { AdvancedType } from 'easy-email-core';
 
 const defaultCategories: ExtensionProps['categories'] = [
   {
-    label: 'Content',
+    get label() {
+      return t('Content');
+    },
     active: true,
     blocks: [
       {
@@ -46,12 +48,16 @@ const defaultCategories: ExtensionProps['categories'] = [
     ],
   },
   {
-    label: 'Layout',
+    get label() {
+      return t('Layout');
+    },
     active: true,
     displayType: 'column',
     blocks: [
       {
-        title: '2 columns',
+        get title() {
+          return t('2 columns');
+        },
         payload: [
           ['50%', '50%'],
           ['33%', '67%'],
@@ -61,7 +67,9 @@ const defaultCategories: ExtensionProps['categories'] = [
         ],
       },
       {
-        title: '3 columns',
+        get title() {
+          return t('3 columns');
+        },
         payload: [
           ['33.33%', '33.33%', '33.33%'],
           ['25%', '25%', '50%'],
@@ -69,8 +77,10 @@ const defaultCategories: ExtensionProps['categories'] = [
         ],
       },
       {
-        title: '4 columns',
-        payload: [[['25%', '25%', '25%', '25%']]],
+        get title() {
+          return t('4 columns');
+        },
+        payload: [['25%', '25%', '25%', '25%']],
       },
     ],
   },
@@ -78,7 +88,13 @@ const defaultCategories: ExtensionProps['categories'] = [
 
 export const StandardLayout: React.FC<ExtensionProps> = props => {
   const { height: containerHeight } = useEditorProps();
-  const { showSourceCode = true, compact = true, categories = defaultCategories } = props;
+  const {
+    showSourceCode = true,
+    compact = true,
+    categories = defaultCategories,
+    jsonReadOnly = false,
+    mjmlReadOnly = true,
+  } = props;
 
   const { setFocusIdx } = useFocusIdx();
 
@@ -110,9 +126,21 @@ export const StandardLayout: React.FC<ExtensionProps> = props => {
               overflow: 'hidden',
             }}
           >
-            {compact && <EditPanel showSourceCode={showSourceCode} />}
+            {compact && (
+              <EditPanel
+                showSourceCode={showSourceCode}
+                jsonReadOnly={jsonReadOnly}
+                mjmlReadOnly={mjmlReadOnly}
+              />
+            )}
             <Layout style={{ height: containerHeight, flex: 1 }}>{props.children}</Layout>
-            {!compact && <EditPanel showSourceCode={showSourceCode} />}
+            {!compact && (
+              <EditPanel
+                showSourceCode={showSourceCode}
+                jsonReadOnly={jsonReadOnly}
+                mjmlReadOnly={mjmlReadOnly}
+              />
+            )}
             {compact ? (
               <Layout.Sider
                 style={{
@@ -126,6 +154,8 @@ export const StandardLayout: React.FC<ExtensionProps> = props => {
                   compact={compact}
                   height={containerHeight}
                   showSourceCode={showSourceCode}
+                  jsonReadOnly={jsonReadOnly}
+                  mjmlReadOnly={mjmlReadOnly}
                 />
               </Layout.Sider>
             ) : (

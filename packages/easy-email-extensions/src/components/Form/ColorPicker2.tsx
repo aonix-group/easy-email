@@ -1,9 +1,13 @@
-import { Input, Popover, PopoverProps, Space } from '@arco-design/web-react';
+/* eslint-disable react/jsx-wrap-multilines */
+import { Input, Popover, PopoverProps } from '@arco-design/web-react';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ColorResult, SketchPicker } from 'react-color';
 import { PresetColorsContext } from '../../AttributePanel/components/provider/PresetColorsProvider';
 import { getImg } from '@extensions/AttributePanel/utils/getImg';
 import styles from './index.module.scss';
+
+const SketchPickerCom = SketchPicker as any;
+
 export interface ColorPickerProps extends PopoverProps {
   onChange?: (val: string) => void;
   value?: string;
@@ -21,8 +25,7 @@ const getCollapseItemEle = (node: HTMLElement | null): HTMLElement | null => {
 };
 
 export function ColorPicker(props: ColorPickerProps) {
-  const { colors: presetColors, addCurrentColor } =
-    useContext(PresetColorsContext);
+  const { colors: presetColors, addCurrentColor } = useContext(PresetColorsContext);
   const [color, setColor] = useState('');
   const { value = '', onChange, children, showInput = true } = props;
   const [refEle, setRefEle] = useState<HTMLElement | null>(null);
@@ -33,14 +36,13 @@ export function ColorPicker(props: ColorPickerProps) {
 
   const onChangeComplete = useCallback(
     (color: ColorResult, event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.value && event.target.value.replace('#', '').length < 6)
-        return;
+      if (event.target.value && event.target.value.replace('#', '').length < 6) return;
       const newColor = color.hex;
       setColor(newColor);
       onChange?.(newColor);
       addCurrentColor(newColor);
     },
-    [addCurrentColor, onChange]
+    [addCurrentColor, onChange],
   );
 
   const onInputChange = useCallback(
@@ -49,7 +51,7 @@ export function ColorPicker(props: ColorPickerProps) {
       onChange?.(value);
       addCurrentColor(value);
     },
-    [addCurrentColor, onChange]
+    [addCurrentColor, onChange],
   );
   return (
     <div style={{ flex: 1, display: 'flex' }}>
@@ -61,7 +63,7 @@ export function ColorPicker(props: ColorPickerProps) {
         position='top'
         content={
           <div className={styles.colorPicker}>
-            <SketchPicker
+            <SketchPickerCom
               presetColors={presetColors}
               color={color}
               disableAlpha
@@ -70,7 +72,10 @@ export function ColorPicker(props: ColorPickerProps) {
           </div>
         }
       >
-        <div style={{ display: 'inline-flex' }} ref={setRefEle}>
+        <div
+          style={{ display: 'inline-flex' }}
+          ref={setRefEle}
+        >
           {children || (
             <div
               style={{
@@ -92,8 +97,7 @@ export function ColorPicker(props: ColorPickerProps) {
                   style={{
                     position: 'relative',
                     display: 'block',
-                    border:
-                      '1px solid var(--color-neutral-3, rgb(229, 230, 235))',
+                    border: '1px solid var(--color-neutral-3, rgb(229, 230, 235))',
 
                     borderRadius: 2,
                     width: '100%',
@@ -107,8 +111,7 @@ export function ColorPicker(props: ColorPickerProps) {
                   style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
-                    filter:
-                      'invert(  0.78  )  drop-shadow(0 0px 0 rgb(0 0 0 / 45%))',
+                    filter: 'invert(  0.78  )  drop-shadow(0 0px 0 rgb(0 0 0 / 45%))',
                   }}
                   src={getImg('AttributePanel_02')}
                 />

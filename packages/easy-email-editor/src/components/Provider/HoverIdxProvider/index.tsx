@@ -1,4 +1,3 @@
-import { BlockType } from 'easy-email-core';
 import React, { useState } from 'react';
 
 export interface HoverIdxState {
@@ -38,7 +37,7 @@ export const HoverIdxContext = React.createContext<{
   setDataTransfer: () => {},
 });
 
-export const HoverIdxProvider: React.FC<{}> = (props) => {
+export const HoverIdxProvider: React.FC<{ children?: React.ReactNode }> = props => {
   const [hoverIdx, setHoverIdx] = useState('');
   const [isDragging, setIsDragging] = useState(false);
   const [dataTransfer, setDataTransfer] = useState<DataTransfer | null>(null);

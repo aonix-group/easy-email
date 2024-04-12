@@ -2,21 +2,23 @@ import React from 'react';
 import {
   ColorPickerField,
   InputWithUnitField,
-  SwitchField,
+  NumberField,
   TextAreaField,
   TextField,
 } from '@extensions/components/Form';
-import { Help } from '@extensions/AttributePanel/components/UI/Help';
 import { AddFont } from '@extensions/components/Form/AddFont';
 import { Collapse, Grid, Space } from '@arco-design/web-react';
-import { Stack, TextStyle, useFocusIdx } from 'easy-email-editor';
+import { Stack, useFocusIdx } from 'easy-email-editor';
 import { AttributesPanelWrapper } from '@extensions/AttributePanel/components/attributes/AttributesPanelWrapper';
 import { FontFamily } from '../../attributes/FontFamily';
+import { pixelAdapter } from '../../adapter';
 
-export function Page() {
+interface PageProps { hideSubTitle?: boolean; hideSubject?: boolean}
+export function Page({ hideSubTitle, hideSubject }: PageProps) {
   const { focusIdx } = useFocusIdx();
 
   if (!focusIdx) return null;
+
   return (
     <AttributesPanelWrapper style={{ padding: 0 }}>
       <Stack.Item fill>
@@ -26,16 +28,20 @@ export function Page() {
             header={t('Email Setting')}
           >
             <Space direction='vertical'>
-              <TextField
-                label={t('Subject')}
-                name={'subject'}
-                inline
-              />
-              <TextField
-                label={t('SubTitle')}
-                name={'subTitle'}
-                inline
-              />
+              {!hideSubject && (
+                <TextField
+                  label={t('Subject')}
+                  name={'subject'}
+                  inline
+                />
+              )}
+              {!hideSubTitle && (
+                <TextField
+                  label={t('SubTitle')}
+                  name={'subTitle'}
+                  inline
+                />
+              )}
               <InputWithUnitField
                 label={t('Width')}
                 name={`${focusIdx}.attributes.width`}
@@ -67,9 +73,11 @@ export function Page() {
                   offset={1}
                   span={11}
                 >
-                  <InputWithUnitField
-                    label={t('Font size')}
+                  <NumberField
+                    label='Font size (px)'
                     name={`${focusIdx}.data.value.font-size`}
+                    config={pixelAdapter}
+                    autoComplete='off'
                   />
                 </Grid.Col>
               </Grid.Row>
@@ -77,7 +85,7 @@ export function Page() {
               <Grid.Row>
                 <Grid.Col span={11}>
                   <InputWithUnitField
-                    label='Line height'
+                    label={t('Line height')}
                     unitOptions='percent'
                     name={`${focusIdx}.data.value.line-height`}
                   />

@@ -1,6 +1,7 @@
 import { blocks } from '../components/blocks';
+import { ReactNode } from 'react';
 
-type ObjectComponent = { [key: string]: () => JSX.Element | null };
+type ObjectComponent = { [key: string]: (...args: any) => ReactNode };
 
 export class BlockAttributeConfigurationManager {
   private static map: ObjectComponent = { ...blocks };

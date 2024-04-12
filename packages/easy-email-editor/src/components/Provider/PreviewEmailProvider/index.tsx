@@ -21,7 +21,7 @@ export const PreviewEmailContext = React.createContext<{
   mobileWidth: 320,
 });
 
-export const PreviewEmailProvider: React.FC<{}> = props => {
+export const PreviewEmailProvider: React.FC<{ children?: React.ReactNode }> = props => {
   const { current: iframe } = useRef(document.createElement('iframe'));
   const contentWindowRef = useRef<Window | null>(null);
 
@@ -83,7 +83,13 @@ export const PreviewEmailProvider: React.FC<{}> = props => {
       } catch (error: any) {
         setErrMsg(error?.message || error);
       }
+    } else {
+      setHtml(parseHtml);
     }
+
+    return () => {
+      setHtml('');
+    };
   }, [injectData, onBeforePreview, lazyPageData, mobileWidth]);
 
   const htmlNode = useMemo(() => HtmlStringToPreviewReactNodes(html), [html]);
@@ -99,6 +105,10 @@ export const PreviewEmailProvider: React.FC<{}> = props => {
     };
 
     document.body.appendChild(iframe);
+
+    return () => {
+      document.body.removeChild(iframe);
+    };
   }, [errMsg, html, iframe]);
 
   useEffect(() => {
@@ -110,6 +120,9 @@ export const PreviewEmailProvider: React.FC<{}> = props => {
       a.style.display = 'inline-block';
       setMobileWidth(Math.max(a.clientWidth, MOBILE_WIDTH));
     }
+    return () => {
+      innerBody.innerHTML = '';
+    };
   }, [html]);
 
   const value = useMemo(() => {

@@ -1,21 +1,21 @@
 import { IEmailTemplate } from '@/typings';
 import { Form, useForm, useFormState, useField } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { BlocksProvider } from '..//BlocksProvider';
 import { HoverIdxProvider } from '../HoverIdxProvider';
 import { PropsProvider, PropsProviderProps } from '../PropsProvider';
 import { RecordProvider } from '../RecordProvider';
 import { ScrollProvider } from '../ScrollProvider';
 import { Config, FormApi, FormState } from 'final-form';
-import { useEffect, useState } from 'react';
 import setFieldTouched from 'final-form-set-field-touched';
 import { FocusBlockLayoutProvider } from '../FocusBlockLayoutProvider';
 import { PreviewEmailProvider } from '../PreviewEmailProvider';
 import { LanguageProvider } from '../LanguageProvider';
+import { overrideErrorLog, restoreErrorLog } from '@/utils/logger';
 
 export interface EmailEditorProviderProps<T extends IEmailTemplate = any>
-  extends PropsProviderProps {
+  extends Omit<PropsProviderProps, 'children'> {
   data: T;
   children: (
     props: FormState<T>,
@@ -37,6 +37,13 @@ export const EmailEditorProvider = <T extends any>(
       content: data.content,
     };
   }, [data]);
+
+  useEffect(() => {
+    overrideErrorLog();
+    return () => {
+      restoreErrorLog();
+    };
+  }, []);
 
   if (!initialValues.content) return null;
 

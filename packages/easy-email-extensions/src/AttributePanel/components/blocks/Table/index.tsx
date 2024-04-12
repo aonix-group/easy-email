@@ -1,6 +1,5 @@
 import { AttributesPanelWrapper } from '@extensions/AttributePanel';
-import { Collapse, Tooltip } from '@arco-design/web-react';
-import { Button } from '@arco-design/web-react';
+import { Collapse, Tooltip, Button } from '@arco-design/web-react';
 import { IconFont, Stack } from 'easy-email-editor';
 import React, { useState } from 'react';
 import { Border } from '../../attributes/Border';
@@ -21,7 +20,7 @@ export function Table() {
   return (
     <AttributesPanelWrapper
       extra={(
-        <Tooltip content='Edit'>
+        <Tooltip content={t('Edit')}>
           <Button
             onClick={() => setVisible(true)}
             icon={<IconFont iconName='icon-html' />}
@@ -30,7 +29,7 @@ export function Table() {
       )}
     >
       <CollapseWrapper defaultActiveKey={['-1', '0', '1', '2', '3']}>
-        <Collapse.Item name='1' header='Dimension'>
+        <Collapse.Item name='1' header={t('Dimension')}>
           <Stack>
             <Width />
             <Stack.Item />
@@ -40,13 +39,13 @@ export function Table() {
           </Stack>
         </Collapse.Item>
 
-        <Collapse.Item name='2' header='Decoration'>
+        <Collapse.Item name='2' header={t('Decoration')}>
           <Color />
           <ContainerBackgroundColor />
           <Border />
         </Collapse.Item>
 
-        <Collapse.Item name='2' header='Typography'>
+        <Collapse.Item name='2' header={t('Typography')}>
           <Stack>
             <FontFamily />
             <FontSize />

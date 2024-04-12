@@ -1,41 +1,19 @@
-import { BasicType, getNodeIdxFromClassName } from 'easy-email-core';
+import { BasicType, getNodeIdxFromClassName, getNodeTypeFromClassName, MERGE_TAG_CLASS_NAME } from 'easy-email-core';
 import { camelCase } from 'lodash';
 import React from 'react';
-import {
-  getNodeTypeFromClassName,
-  MERGE_TAG_CLASS_NAME,
-} from 'easy-email-core';
 import { isTextBlock } from './isTextBlock';
 import { MergeTagBadge } from './MergeTagBadge';
-import { ContentEditableType, DATA_CONTENT_EDITABLE_IDX, DATA_CONTENT_EDITABLE_TYPE, } from '@/constants';
+import { ContentEditableType, DATA_CONTENT_EDITABLE_IDX, DATA_CONTENT_EDITABLE_TYPE } from '@/constants';
 import { isButtonBlock } from './isButtonBlock';
 import { getContentEditableIdxFromClassName, getContentEditableTypeFromClassName } from './contenteditable';
 import { getContentEditableClassName } from './getContentEditableClassName';
 import { isNavbarBlock } from './isNavbarBlock';
-const domParser = new DOMParser();
 
-const errLog = console.error;
+const domParser = new DOMParser();
 
 export function getChildSelector(selector: string, index: number) {
   return `${selector}-${index}`;
 }
-
-console.error = (message?: any, ...optionalParams: any[]) => {
-  // ignore validateDOMNesting
-  if (
-    typeof message === 'string' &&
-    [
-      'Unsupported vendor-prefixed style property',
-      'validateDOMNesting',
-      'Invalid DOM',
-      'You provided a `checked` prop to a form field without an `onChange` handler',
-    ].some((item) => message.includes(item))
-  ) {
-    // no console
-  } else {
-    errLog(message, ...optionalParams);
-  }
-};
 
 export interface HtmlStringToReactNodesOptions {
   enabledMergeTagsBadge: boolean;

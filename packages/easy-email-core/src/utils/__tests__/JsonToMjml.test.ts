@@ -2,6 +2,7 @@ import { BasicType } from './../../constants';
 import { BlockManager } from './../BlockManager';
 
 import { JsonToMjml } from '../JsonToMjml';
+
 const Page = BlockManager.getBlockByType(BasicType.PAGE)!;
 const Section = BlockManager.getBlockByType(BasicType.SECTION)!;
 const Column = BlockManager.getBlockByType(BasicType.COLUMN)!;
@@ -30,7 +31,7 @@ describe('Test JsonToMjml when responsive is "false"', () => {
     context: content,
   });
 
-  it('should contains the mark of "<meta name="viewport" />"', () => {
+  it('should contain the mark of "<meta name="viewport" />"', () => {
     expect(parseHtml).toContain('<meta name="viewport" />');
   });
 });
@@ -122,3 +123,30 @@ describe('Test JsonToMjml when mode is "production"', () => {
     expect(parseHtml).toMatchSnapshot();
   });
 });
+
+describe('json with manual variables added to content', () => {
+  const content = Page.create({
+    children: [
+      Section.create({
+        children: [
+          Column.create({
+            children: [Text.create({data:{value:{content: `<div>{% assign iteration_example = "First,Second,Third,Fourth,Fifth" | split: ',' %}</div>`
+            }}})],
+          }),
+        ],
+      }),
+    ],
+  });
+
+  const parseHtml = JsonToMjml({
+    data: content,
+    mode: 'testing',
+    context: content,
+    idx: 'content',
+  });
+
+  it('should render without any escaped HTML characters', () => {
+    console.log('parseHtml', parseHtml);
+    expect(parseHtml).toMatchSnapshot();
+  });
+})
